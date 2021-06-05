@@ -1,0 +1,33 @@
+{
+  "name": "nextjs",
+  "version": "1.0.0",
+  "description": "nextjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nolec",
+  "license": "ISC",
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.16.1",
+    "next": "^10.2.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "typescript": "^4.3.2"
+  }
+}
