@@ -2,29 +2,18 @@ import React, { useCallback, useMemo, useState } from "react";
 import { Button, Form } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
+import useInput from "../hooks/useInput";
 
 interface IProps {
   setIsLoggedIn: Function;
 }
 
 const LoginForm: React.FC<IProps> = ({ setIsLoggedIn }) => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, onChangeId] = useInput("");
+  const [password, onChangePassword] = useInput("");
 
   //useCallback 은 함수를 캐싱하는 것!
   //useMemo 는 값을 캐싱하는 것!
-  const onChangeId = useCallback(
-    (e: any) => {
-      setId(e.target.value);
-    },
-    [id]
-  );
-  const onChangePassword = useCallback(
-    (e: any) => {
-      setPassword(e.target.value);
-    },
-    [password]
-  );
 
   const onSubmitForm = useCallback(() => {
     console.log(id, password);

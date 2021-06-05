@@ -14,20 +14,20 @@ const AppLayout: React.FC = ({ children }) => {
   return (
     <div>
       <Menu mode={"horizontal"}>
-        <Menu.Item>
+        <Menu.Item key={1}>
           <Link href="/">
             <a>노드버드</a>
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item key={2}>
           <Link href="/profile">
             <a>프로필</a>
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item key={3}>
           <SearchInput enterButton style={{ verticalAlign: "middle" }} />
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item key={4}>
           <Link href="/signup">
             <a>회원가입</a>
           </Link>
