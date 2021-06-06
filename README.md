@@ -72,3 +72,26 @@ CSS 파일도 import 가능
 ## 5 next-redux-wrapper
 
 - 넥스트에서 필요한 redux 라이브러리
+
+## 6 redux-saga
+
+- !!generator 함수에 대해 알아야한다.
+- 중간중간에 중단할 수 있음!! (yield로)
+
+```
+    const gen = function* () {
+        console.log(1);
+        yield // ex) gen.next() 실행 시 여기까지하고 멈춘다. {value : undefined, done : false}
+        console.log(2);
+        yield // ex) gen.next() 한번 더 실행 시 여기까지 하고 또 멈춘다. {value : undefined, done : false}
+        console.log(3);
+        yield 4;// ex) gen.next() 한번 더 실행 시 끝나면서 {value : 4, done : true}.
+    }
+
+    const g = function* () {
+        while(true) {
+            yield '무한';
+        }
+    }
+    // 무한반복 되지 않고 멈춘다!!
+```
