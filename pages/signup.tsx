@@ -1,4 +1,4 @@
-import { Checkbox, Form } from "antd";
+import { Button, Checkbox, Form } from "antd";
 import Head from "next/head";
 import React, { useCallback, useMemo, useState } from "react";
 import AppLayout from "../components/app_layout";
@@ -20,14 +20,22 @@ const SignUp: React.FC = () => {
     [passwordCheck]
   );
 
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState(false);
   const [termError, setTermError] = useState(false);
   const onChangeTerm = useCallback((e: any) => {
     setTerm(e.target.checked);
     setTermError(false);
   }, []);
 
-  const onSubmit = useCallback(() => {}, []);
+  const onSubmit = useCallback(() => {
+    if (password !== passwordCheck) {
+      return setPasswordError(true);
+    }
+    if (!term) {
+      return setTermError(true);
+    }
+    console.log(id, nickname, password);
+  }, [password, passwordCheck, term]);
 
   const errorStyle = useMemo(() => ({ color: "red" }), []);
   return (
@@ -55,6 +63,7 @@ const SignUp: React.FC = () => {
           <label htmlFor="user-password">비밀번호</label>
           <br />
           <input
+            type={"password"}
             name="user-password"
             value={password}
             onChange={onChangePassword}
@@ -65,6 +74,7 @@ const SignUp: React.FC = () => {
           <label htmlFor="user-passwordCheck">비밀번호 체크</label>
           <br />
           <input
+            type={"password"}
             name="user-passwordCheck"
             value={passwordCheck}
             onChange={onChangePasswordCheck}
@@ -79,6 +89,11 @@ const SignUp: React.FC = () => {
             노렉의 말을 잘 들을 것을 동의합니다.
           </Checkbox>
           {termError && <div style={errorStyle}>약관에 동의하셔야 합니다.</div>}
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <Button type={"primary"} htmlType={"submit"}>
+            가입하기
+          </Button>
         </div>
       </Form>
     </AppLayout>
