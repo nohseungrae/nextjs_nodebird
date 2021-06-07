@@ -6,15 +6,16 @@ import rootReducer from "../reducers";
 import createSaraMiddleware from "redux-saga";
 import "redux";
 import { Task } from "redux-saga";
+import rootSaga from "../sagas";
 
 declare module "redux" {
   export interface Store {
-    sagaTask?: Task;
+    sagaTask: Task;
   }
 }
 
 const loggerMiddleware = ({ dispatch, getState }) => (next) => (action) => {
-  console.log(action);
+  console.log(dispatch, getState, action);
   if (typeof action === "function") {
     return action(dispatch, getState);
   }

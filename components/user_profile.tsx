@@ -1,14 +1,16 @@
 import React, { useCallback } from "react";
 import { Card, Avatar, Button } from "antd";
-import { useDispatch } from "react-redux";
-import { logoutAction } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutRequestAction } from "../reducers/user";
 
 interface IProps {}
 
 const UserProfile: React.FC<IProps> = () => {
   const dispatch = useDispatch();
+  const { me, isLoggingOut } = useSelector((state: any) => state.user);
+
   const onLogOut = useCallback(() => {
-    dispatch(logoutAction());
+    dispatch(logoutRequestAction());
   }, []);
   return (
     <Card
@@ -19,10 +21,12 @@ const UserProfile: React.FC<IProps> = () => {
       ]}
     >
       <Card.Meta
-        avatar={<Avatar>NOLEC</Avatar>}
-        title={"로그인 성공 후 프로필"}
+        avatar={<Avatar>{me.nickname}</Avatar>}
+        title={me.nickname[0]}
       />
-      <Button onClick={onLogOut}>로그아웃</Button>
+      <Button onClick={onLogOut} loading={isLoggingOut}>
+        로그아웃
+      </Button>
     </Card>
   );
 };

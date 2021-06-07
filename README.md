@@ -45,6 +45,9 @@ CSS 파일도 import 가능
     prev === next --> false
 ```
 
+- throttling --> 마지막 함수가 호출 된 후 일정 시간이 지나기 전에 다시 호출되지 않도록 하는 것
+- debouncing --> 연이어 호출되는 함수들 중 마지막 함수(또는 제일 처음)만 호출하도록 하는 것
+
 # 시작
 
 ## 1 기본설정
@@ -77,6 +80,7 @@ CSS 파일도 import 가능
 
 - !!generator 함수에 대해 알아야한다.
 - 중간중간에 중단할 수 있음!! (yield로)
+- 사가는 테스트할 때 편하다
 
 ```
     const gen = function* () {
@@ -94,4 +98,10 @@ CSS 파일도 import 가능
         }
     }
     // 무한반복 되지 않고 멈춘다!!
+
+    const l = logIn({ type: "LOG_IN_REQUEST", data: { id: "nolec@naver.com" } });
+    l.next(); // 여기까지만 실행된다.
+    l.next(); // 여기까지만 실행된다.
 ```
+
+- dispatch 실행 시 reducer 와 saga 쪽이 거의 동시에 실행된다.

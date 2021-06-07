@@ -1,3 +1,12 @@
+import {
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILURE,
+} from "../types/post.types";
+
 export const initialState = {
   //시퀄라이즈와 관련있음 -- 기본 속성이 아닌 데이터를 합쳐서 리턴해주는 경우 첫글자가 대문자이다.
   mainPosts: [
@@ -23,15 +32,21 @@ export const initialState = {
       Comments: [{ User: { nickname: "zero" }, content: "hello" }],
     },
   ],
-  postAdded: false,
   imagePaths: [],
+  addPostLoading: false,
+  addPostDone: false,
+  addPostError: null,
 };
 
-const ADD_POST = "ADD_POST";
+export const addPost = (data) => ({
+  type: ADD_POST_REQUEST,
+  data,
+});
 
-export const addPost = {
-  type: ADD_POST,
-};
+export const addComment = (data) => ({
+  type: ADD_COMMENT_REQUEST,
+  data,
+});
 
 const dummyPost = {
   id: 2,
@@ -43,11 +58,44 @@ const dummyPost = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST_REQUEST:
+      return {
+        ...state,
+        addPostLoading: true,
+        addPostError: null,
+        addPostDone: false,
+      };
+    case ADD_POST_SUCCESS:
       return {
         ...state,
         mainPosts: [dummyPost, ...state.mainPosts],
-        postAdded: true,
+        addPostLoading: false,
+        addPostDone: true,
+      };
+    case ADD_POST_FAILURE:
+      return {
+        ...state,
+        addPostLoading: false,
+        addPostError: action.error,
+      };
+    case ADD_COMMENT_REQUEST:
+      return {
+        ...state,
+        addCommentLoading: true,
+        addCommentError: null,
+        addCommentDone: false,
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        addCommentLoading: false,
+        addCommentDone: true,
+      };
+    case ADD_COMMENT_FAILURE:
+      return {
+        ...state,
+        addCommentLoading: false,
+        addCommentError: action.error,
       };
 
     default:
