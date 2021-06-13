@@ -4,7 +4,7 @@ import postSaga from "./post";
 import userSaga from "./user";
 // import { backUrl } from "../config/config";
 
-// axios.defaults.baseURL = backUrl;
+axios.defaults.baseURL = "http://localhost:3001";
 // axios.defaults.withCredentials = true;
 
 //generator!! -- 특별한 역할을 하는 함수!! .next()붙여야 됌!

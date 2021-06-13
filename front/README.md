@@ -113,3 +113,48 @@ CSS 파일도 import 가능
 - throttle, takelatest 로는 요청이 계속 가므로 loading으로 추가적으로 막아줌
 - 유저가 무한하게 post를 본다면 모바일 같은 경우 메모리가 터질 수도 있으므로 그 경우에는 react-virtualized(virtualizedList라는 기술) 를 사용하면 좋다.
 - 수천개의 게시글 중에 화면에 보이는 것들만 그려주고 나머지는 메모리에 가지고 있는다.
+
+# BackEnd
+
+## 1 express
+
+- get -> 가져오다.
+- post -> 생성하다. 애매하면 post 쓰자
+- put -> 전체수정
+- delete -> 제거
+- patch -> 부분수정 ex)사용자의 닉네임만 변경하겠다!
+- options -> 찔러보기 - 요청 보낼 수 있어 \* "Access-Control-Allow-Origin" 있나 체크하는!!
+- head -> header만 가져오기
+- 300 : 리다이렉트
+- 400 : 클라이언트 에러
+- 500 : 서버 에러
+- 브라우저에서 서버로 요청을 보냈을 때 발생하는 문제 (CORS \* 다른 도메인일 경우) - 서버에서 서버로 보낼 때에는 안 생김
+- 그렇기에 브라우저(3000) -> 프론트서버(3000) -> 백엔드서버(3001) 이렇게 보내는 proxy 방식을 사용하자
+
+## 2 sequelize
+
+- npx sequelize db:create : 설정된 디비 생성
+- npm i sequelize sequelize-cli mysql2
+- npx sequelize init
+- 자바스크립트로 sql을 조작할 수 있게끔 하는 라이브러리
+
+### Many To Many RelationShip
+
+```
+hashTag - post 가 다 대 다 관계일 시
+중간에 매핑 테이블 같은 형태의 테이블이 생기면서
+1. 노드 태그         1. 게시글1 - 노드, 리액트
+2. 리액트 태그        2. 게시글2 - 노드, 익스프레스
+3. 익스프레스 태그      3. 게시글3 - 리액트, 익스프레스
+
+!중간테이블!
+postHashTag
+노드 - 게시글1
+리액트 - 게시글1
+노드 - 게시글2
+익스프레스 - 게시글2
+리액트 - 게시글3
+익스프레스 - 게시글3
+```
+
+## 3 passport passport-local

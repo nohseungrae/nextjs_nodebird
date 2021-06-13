@@ -1,5 +1,5 @@
 import axios from "axios";
-import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
+import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import {
   FOLLOW_FAILURE,
   FOLLOW_REQUEST,
@@ -54,15 +54,14 @@ function* watchUnFollow() {
   yield takeLatest(UNFOLLOW_REQUEST, unFollow);
 }
 function logInAPI(data) {
-  return axios.post("/api/login", data);
+  return axios.post("/login", data);
 }
 // logInAPI(action.data) 일반적
 // call(logInAPI, action.data) 특이점
 function* logIn(action) {
   try {
-    console.log("sara login");
-    // const result = yield fork(logInAPI, action.data);
-    yield delay(2000);
+    console.log("saga login");
+    const result = yield call(logInAPI, action.data);
 
     yield put({
       type: LOG_IN_SUCCESS,
@@ -96,7 +95,7 @@ function* watchLogin() {
 }
 //------------------------------------------------
 function logOutAPI() {
-  return axios.post("/api/logout");
+  return axios.post("/logout");
 }
 function* logOut() {
   try {
@@ -120,15 +119,14 @@ function* watchLogOut() {
 }
 //------------------------------------------------
 function signUpAPI(data) {
-  return axios.post("/api/signup", data);
+  return axios.post("/user", data);
 }
 function* signUp(action) {
   try {
-    // const result = yield fork(signUpAPI, action.data);
-    yield delay(2000);
+    const result = yield call(signUpAPI, action.data);
     yield put({
       type: SIGN_UP_SUCCESS,
-      // data: result.data,
+      data: result.data,
     });
   } catch (error) {
     //put을 디스패치라고 생각

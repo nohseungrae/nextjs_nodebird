@@ -1,6 +1,7 @@
 import { Button, Checkbox, Form } from "antd";
 import Head from "next/head";
-import React, { useCallback, useMemo, useState } from "react";
+import Router from "next/router";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../components/app_layout";
 import useInput from "../hooks/useInput";
@@ -8,7 +9,21 @@ import { SIGN_UP_REQUEST } from "../types/user_types";
 
 const SignUp: React.FC = () => {
   const dispatch = useDispatch();
-  const { signUpLoading } = useSelector((state: any) => state.user);
+  const { signUpLoading, signUpDone, signUpError } = useSelector(
+    (state: any) => state.user
+  );
+
+  useEffect(() => {
+    if (signUpDone) {
+      Router.push("/");
+    }
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
 
   const [email, onChangeEmail] = useInput("");
   const [nickname, onChangeNickname] = useInput("");
