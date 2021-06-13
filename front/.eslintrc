@@ -1,0 +1,32 @@
+{
+    //기본 eslint 가 해석하는게 아니라 babel-eslint가 해석해서 최신문법도 에러를 발생시키지 않는다.
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 2021, // 최신문법으로 하겠다.
+        "sourceType": "module", // import export 형식을 사용하겠다.
+        "ecmaFeatures": {
+            "jsx" : true, // 특수한 기능들 설정
+            "tsx" : true
+        }
+    },
+    "env": {
+        "browser": true, // 브라우저에서 돌아간다.
+        "node": true, // 노드에서 돌아간다.
+        "es6": true // 최신 문법을 사용하곘다.
+    },
+    "extends": [
+        "airbnb"//airbnb 사가 좀 강하게 규제한다.
+        // "eslint:recommend",
+        // "plugin:react/recommended" // 남들이 만들어 놓은 이러한 규칙들을 따르겠다.
+        // 위의 규칙들은 좀 너그러운 편
+    ],
+    "plugins": [
+        "import",
+        "react-hooks",
+        "jsx-a11y"
+    ],
+    "rules": {
+        "no-console" : "off",
+        "no-underscore-dangle" : "off",
+    }
+}
