@@ -53,4 +53,15 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
   })(req, res, next);
 });
 
+router.post(
+  "/user/logout",
+  (req: Request, res: Response, next: NextFunction) => {
+    req.logout();
+    req.session.destroy((err) => {
+      console.log(err);
+    });
+    res.send("ok");
+  }
+);
+
 export default router;

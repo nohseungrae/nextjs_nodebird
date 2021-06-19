@@ -158,3 +158,12 @@ postHashTag
 ```
 
 ## 3 passport passport-local
+
+- 로그인 했을 경우 network - response Headers - set-Cookie : connect.sid=~~~~~ => 내 정보들
+- 쿠키랑 아이디 비밀번호를 비교해서 유저가 맞는지 체크한다.
+- deserializeUser 로그인을 성공하고 나서 그 다음 요청부터 매번 실행된다.(id + cookie와 함께)
+- 아이디로부터 사용자 정보를 복구해낸다.
+
+## 4 dotenv
+
+- 서버가 털려도 중요한 비밀번호나 여러 정보들을 따로 .env 파일 안에서 관리하여 보호하는 용도
